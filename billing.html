@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Billing System</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="billingSystem.css">
+
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+
+<body>
+  <div class="floating-icons">
+  <span>🍕</span>
+  <span>🍔</span>
+  <span>☕</span>
+  <span>🍟</span>
+  <span>🥤</span>
+  <span>🍜</span>
+  <span>🍰</span>
+  <span>🌮</span>
+</div>
+
+<div class="light-streak"></div>
+<div class="light-streak streak2"></div>
+  <div class="container">
+    <div class="restaurant-brand">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS35vd1kdaePbXeuisgTnV9kIe1MUfEJTXdyA&s" alt="Restaurant Logo" class="logo">
+    <div class="restaurant-image">
+    <img src="https://thumbs.dreamstime.com/b/chinese-restaurant-interior-empty-asian-cafe-chinese-restaurant-interior-empty-cafe-traditional-asian-style-red-gold-198959059.jpg" alt="Restaurant">
+</div>
+    <h2>Dhairya's Restaurant</h2>
+</div>
+    <h1>🍽 Restaurant Billing System</h1>
+<button id="themeToggle" class="theme-btn">🌙 Dark Mode</button>
+    <label for="customer">Customer Name</label>
+    <input type="text" id="customer" placeholder="Enter customer name">
+
+    <div id="items">
+
+      <!-- Breakfast -->
+      <label class="section-label">Breakfast</label>
+      <div class="item-row">
+        <select class="food-select">
+          <option value="None">-- None --</option>
+          <option value="Pancakes">Pancakes - ₹120</option>
+          <option value="Omelette">Omelette - ₹100</option>
+          <option value="Toast">Toast - ₹60</option>
+          <option value="Bread and Butter">Bread and Butter - ₹40</option>
+          <option value="Aloo Pratha">Aloo Pratha - ₹60</option>
+          <option value="Cereals">Cereals - ₹80</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1">
+      </div>
+
+      <!-- Lunch -->
+      <label class="section-label">Lunch</label>
+      <div class="item-row">
+        <select class="food-select">
+          <option value="None">-- None --</option>
+          <option value="Rice & Curry">Rice & Curry - ₹200</option>
+          <option value="Thali">Thali - ₹220</option>
+          <option value="Dal Makhani">Dal Makhani - ₹180</option>
+          <option value="Naan">Naan - ₹180</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1">
+      </div>
+
+      <!-- Dinner -->
+      <label class="section-label">Dinner</label>
+      <div class="item-row">
+        <select class="food-select">
+          <option value="None">-- None --</option>
+          <option value="Paneer Butter Masala">Paneer Butter Masala - ₹230</option>
+          <option value="Butter Naan">Butter Naan - ₹40</option>
+          <option value="Biryani">Biryani - ₹250</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1">
+      </div>
+
+      <!-- Fast Food -->
+      <label class="section-label">Fast Food</label>
+      <div class="item-row">
+        <select class="food-select">
+          <option value="None">-- None --</option>
+          <option value="Pizza">Pizza - ₹250</option>
+          <option value="Burger">Burger - ₹150</option>
+          <option value="Fries">Fries - ₹100</option>
+          <option value="Noodles">Noodles - ₹180</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1">
+      </div>
+
+      <!-- Drinks -->
+      <label class="section-label">Drinks</label>
+      <div class="item-row">
+        <select class="food-select">
+          <option value="None">-- None --</option>
+          <option value="Coke">Coke - ₹50</option>
+          <option value="Coffee">Coffee - ₹80</option>
+          <option value="Tea">Tea - ₹40</option>
+          <option value="Juice">Juice - ₹60</option>
+          <option value="justone">Justone - ₹1</option>
+        </select>
+        <input type="number" class="quantity" min="1" value="1">
+      </div>
+
+    </div>
+
+    <!-- Buttons -->
+     <button onclick="showMenuQR()">
+    📖 View Menu QR
+</button>
+    <div class="button-group">
+      <button onclick="addItemRow()">➕ Add Item</button>
+      <button onclick="generateRestaurantBill()">🧾 Generate Bill</button>
+      <button onclick="clearBill()">🗑 Clear</button>
+      <button onclick="window.print()">🖨 Print</button>
+    </div>
+
+    <!-- Bill Section -->
+    <div class="bill" id="bill"></div>
+
+    <!-- QR Code Section -->
+    <div id="qr-section" style="display:none; text-align:center; margin-top:20px;">
+      <h3>📱 Scan to Pay</h3>
+      <div id="qrcode"></div>
+      <p><strong>UPI Payment</strong></p>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="bill.js"></script>
+
+<!-- 3D Background -->
+<div id="particles-js"></div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<div id="menuPopup" class="popup">
+
+    <div class="popup-content">
+
+        <span class="close-btn"
+        onclick="closeMenuQR()">✖</span>
+
+        <h2>📖 Scan Menu QR</h2>
+
+        <img src="menu-qr.png"
+        alt="Menu QR"
+        class="menu-qr">
+
+        <p>Scan to view full digital menu</p>
+
+    </div>
+
+</div>
+</body>
+</html>
+
