@@ -212,3 +212,21 @@ function showMenuQR(){
 function closeMenuQR(){
     document.getElementById("menuPopup").style.display="none";
 }
+function showMenuQR(){
+
+  document.getElementById("menuPopup").style.display = "flex";
+
+  const qrBox = document.getElementById("menuQRCode");
+
+  qrBox.innerHTML = "";
+
+  new QRCode(qrBox,{
+    text:"https://dhairyachaudhary7.github.io/restaurant-billing-system/menu.html",
+    width:250,
+    height:250
+  });
+}
+
+function closeMenuQR(){
+  document.getElementById("menuPopup").style.display = "none";
+}
